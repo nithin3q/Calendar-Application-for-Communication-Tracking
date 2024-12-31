@@ -26,9 +26,9 @@ export const AppProvider = ({ children }) => {
     const fetchInitialData = async () => {
       try {
         const [companiesRes, methodsRes, schedulesRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/companies"),
-          axios.get("http://localhost:5000/api/communication-methods"),
-          axios.get("http://localhost:5000/api/next-communications"),
+          axios.get("https://calendar-backend-azure.vercel.app/api/companies"),
+          axios.get("https://calendar-backend-azure.vercel.app/api/communication-methods"),
+          axios.get("https://calendar-backend-azure.vercel.app/api/next-communications"),
         ]);
 
         const fetchedCompanies = companiesRes.data || [];
@@ -113,8 +113,8 @@ export const AppProvider = ({ children }) => {
         nextDate.setDate(nextDate.getDate() + defaultPeriodicInterval);
         newCompany.nextCommunication = nextDate.toISOString().split("T")[0];
       }
-      await axios.post("http://localhost:5000/api/companies", newCompany);
-      const response = await axios.get("http://localhost:5000/api/companies");
+      await axios.post("https://calendar-backend-azure.vercel.app/api/companies", newCompany);
+      const response = await axios.get("https://calendar-backend-azure.vercel.app/api/companies");
       setCompanies(response.data || []);
     } catch (error) {
       console.error("Error adding company:", error);
@@ -131,7 +131,7 @@ export const AppProvider = ({ children }) => {
       }
 
       await axios.put(
-        `http://localhost:5000/api/companies/${updatedCompany._id}`,
+        `https://calendar-backend-azure.vercel.app/api/companies/${updatedCompany._id}`,
         updatedCompany
       );
       setCompanies((prev) =>
@@ -147,7 +147,7 @@ export const AppProvider = ({ children }) => {
   // Delete a company
   const deleteCompany = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/companies/${id}`);
+      await axios.delete(`https://calendar-backend-azure.vercel.app/api/companies/${id}`);
       setCompanies((prev) => prev.filter((company) => company._id !== id));
     } catch (error) {
       console.error("Error deleting company:", error);
@@ -168,7 +168,7 @@ export const AppProvider = ({ children }) => {
       if (activeSchedules[companyId]) {
         // Update existing schedule
         response = await axios.put(
-          `http://localhost:5000/api/next-communications/${activeSchedules[companyId]._id}`,
+          `https://calendar-backend-azure.vercel.app/api/next-communications/${activeSchedules[companyId]._id}`,
           {
             communicationType,
             scheduledDate,
@@ -177,7 +177,7 @@ export const AppProvider = ({ children }) => {
       } else {
         // Create new schedule
         response = await axios.post(
-          "http://localhost:5000/api/next-communications",
+          "https://calendar-backend-azure.vercel.app/api/next-communications",
           {
             companyId,
             communicationType,
@@ -200,7 +200,7 @@ export const AppProvider = ({ children }) => {
   const logCommunication = async (companyId, communicationData) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/communications",
+        "https://calendar-backend-azure.vercel.app/api/communications",
         {
           companyId,
           communicationType: communicationData.communicationType,
@@ -240,11 +240,11 @@ export const AppProvider = ({ children }) => {
   const addMethod = async (newMethod) => {
     try {
       await axios.post(
-        "http://localhost:5000/api/communication-methods",
+        "https://calendar-backend-azure.vercel.app/api/communication-methods",
         newMethod
       );
       const response = await axios.get(
-        "http://localhost:5000/api/communication-methods"
+        "https://calendar-backend-azure.vercel.app/api/communication-methods"
       );
       setMethods(response.data || []);
       // setMethods((prev) => [...prev, response.data]);
@@ -257,7 +257,7 @@ export const AppProvider = ({ children }) => {
   const updateMethod = async (updatedMethod) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/communication-methods/${updatedMethod._id}`,
+        `https://calendar-backend-azure.vercel.app/api/communication-methods/${updatedMethod._id}`,
         updatedMethod
       );
       setMethods((prev) =>
@@ -274,7 +274,7 @@ export const AppProvider = ({ children }) => {
   const deleteMethod = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/communication-methods/${id}`
+        `https://calendar-backend-azure.vercel.app/api/communication-methods/${id}`
       );
       setMethods((prev) => prev.filter((method) => method._id !== id));
     } catch (error) {
@@ -303,7 +303,7 @@ export const AppProvider = ({ children }) => {
 const cancelNextCommunication = async (companyId) => {
   try {
     if (activeSchedules[companyId]) {
-      await axios.delete(`http://localhost:5000/api/next-communications/${activeSchedules[companyId]._id}`);
+      await axios.delete(`https://calendar-backend-azure.vercel.app/api/next-communications/${activeSchedules[companyId]._id}`);
       setActiveSchedules((prev) => {
         const newSchedules = { ...prev };
         delete newSchedules[companyId];
@@ -316,7 +316,7 @@ const cancelNextCommunication = async (companyId) => {
 };
 const removeCommunication = async (companyId, communicationId) => {
   try {
-    await axios.delete(`http://localhost:5000/api/communications/${communicationId}`);
+    await axios.delete(`https://calendar-backend-azure.vercel.app/api/communications/${communicationId}`);
     
     // Update companies state
     setCompanies(prevCompanies => 
