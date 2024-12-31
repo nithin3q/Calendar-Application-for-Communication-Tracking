@@ -171,7 +171,7 @@ const CompanyCard = ({
                     </button>
                   )}
                   <button
-                    onClick={onScheduleNext}
+                    onClick={() => onScheduleNext(company)}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     {activeSchedules[company._id] ? "Update" : "Schedule"}

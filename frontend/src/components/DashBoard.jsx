@@ -115,6 +115,7 @@ const Dashboard = () => {
     // Call the scheduling function with correct data structure
     scheduleNextCommunication(
       selectedCompanyForNextContact,
+      // selectedCompanyForNextContact.companyId,
       nextContactData.nextCommunicationType,
       nextContactData.nextCommunicationDate
     );
@@ -172,6 +173,7 @@ const Dashboard = () => {
         setNextContactData={setNextContactData}
         onSubmit={handleNextContactSubmit}
       />
+      
       <div className="grid grid-cols-1 gap-4">
       <h1 className="text-3xl font-bold text-gray-400 mb-2 ">Company Info</h1>
         {companies.map((company, index) => (
@@ -187,8 +189,21 @@ const Dashboard = () => {
           onToggleHighlight={() => toggleHighlight(company._id)}  // This is the key handler
           onScheduleNext={() => {
             setSelectedCompanyForNextContact(company._id);
+            // Populate with existing values if available
+            if (activeSchedules[company._id]) {
+              setNextContactData({
+                nextCommunicationType: activeSchedules[company._id].communicationType,
+                nextCommunicationDate: activeSchedules[company._id].scheduledDate
+              });
+            } else {
+              // Reset form if no existing schedule
+              setNextContactData({
+                nextCommunicationType: "",
+                nextCommunicationDate: ""
+              });
+            }
             setShowNextContactModal(true);
-          }}
+          }}          
           onCancelNext={() => cancelNextCommunication(company._id)}
           hoveredCommunication={hoveredCommunication}
           setHoveredCommunication={setHoveredCommunication}
