@@ -190,8 +190,8 @@ const CalendarView = () => {
               top: 25px;
               left: 50%;
               transform: translateX(-50%);
-              width: 30px;
-              height: 30px;
+              width: 20px;
+              height: 20px;
               background: url('https://aquarlabs.com/assets/imgs/template/icons/cursor-drag.svg') center/contain no-repeat;
               background-color: rgba(0,0,0,0.8);
               border-radius: 50%;

@@ -12,6 +12,7 @@ const NotificationsHeader = ({ notificationCount, onNotificationClick }) => {
   const handleLogout = () => {
     setUserRole("");
     localStorage.removeItem("userRole");
+    localStorage.removeItem("isAuthenticated");
     navigate("/login");
   };
 

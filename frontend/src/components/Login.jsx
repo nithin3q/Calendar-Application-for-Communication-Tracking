@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
@@ -13,23 +13,38 @@ const Login = () => {
     user: { username: 'user', password: 'user123' }
   };
 
+  
+  useEffect(() => {
+    const storedRole = localStorage.getItem('userRole');
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    
+    if (isAuthenticated && storedRole) {
+      setUserRole(storedRole);
+      navigate(storedRole === 'admin' ? '/admin' : '/');
+    }
+  }, [navigate, setUserRole]);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
+      
     if (credentials.username === defaultCredentials.admin.username && 
         credentials.password === defaultCredentials.admin.password) {
       setUserRole('admin');
       localStorage.setItem('userRole', 'admin');
+      localStorage.setItem('isAuthenticated', 'true');
       navigate('/admin');
     } else if (credentials.username === defaultCredentials.user.username && 
                credentials.password === defaultCredentials.user.password) {
-      setUserRole('user');
+      setUserRole('user'); 
       localStorage.setItem('userRole', 'user');
+      localStorage.setItem('isAuthenticated', 'true');
       navigate('/');
     } else {
       setError('Invalid credentials');
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
