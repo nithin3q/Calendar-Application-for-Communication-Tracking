@@ -34,24 +34,24 @@ This is a React-based calendar application designed for tracking and managing co
    \`\`\`bash
    git clone https://github.com/nithin3q/Calendar-Application-for-Communication-Tracking.git
    cd Calendar-Application-for-Communication-Tracking
-   \`\`\`
+   ```
 
 2. Install dependencies:
-   \`\`\`bash
+   ```
    npm install
-   \`\`\`
+   ```
 
 3. Start the development server:
-   \`\`\`bash
+   ```
    npm start
-   \`\`\`
+   ```
 
 4. Open the application in your browser at \`http://localhost:3000\`.
 
 ## API Endpoints
 
 ### 1. **Submit Form**
-   \`\`\`bash
+   ```
    curl -X POST "http://localhost:3000/submit-form" \\
    -H "Content-Type: application/json" \\
    -H "x-apikey: your-api-key" \\
@@ -63,15 +63,15 @@ This is a React-based calendar application designed for tracking and managing co
      "subject": "Inquiry",
      "message": "Sample message"
    }'
-   \`\`\`
+   ```
 
 ### 2. **Get Organizations**
-   \`\`\`bash
+   ```
    curl -X GET "http://localhost:3000/get-organizations" -H "x-apikey: your-api-key"
-   \`\`\`
+   ```
 
 ### 3. **Store Organization**
-   \`\`\`bash
+   ```
    curl -X POST "http://localhost:3000/set-organization" \\
    -H "Content-Type: application/json" \\
    -H "x-apikey: your-api-key" \\
@@ -79,11 +79,11 @@ This is a React-based calendar application designed for tracking and managing co
      "name": "Organization Name",
      "email": "organization@example.com"
    }'
-   \`\`\`
+   ```
 
 ## Folder Structure
 
-\`\`\`
+```
 📦 Calendar-Application-for-Communication-Tracking
 ├── 📁 src
 │   ├── 📁 components
@@ -95,26 +95,24 @@ This is a React-based calendar application designed for tracking and managing co
 ├── package.json
 ├── README.md
 └── .gitignore
-\`\`\`
+```
 
 ## Contribution Guidelines
 1. Fork the repository.
 2. Create a new branch:
-   \`\`\`bash
+   ```
    git checkout -b feature-branch-name
-   \`\`\`
+   ```
 3. Commit your changes:
-   \`\`\`bash
+   ```
    git commit -m "Brief description of your changes"
-   \`\`\`
+   ```
 4. Push to the branch:
-   \`\`\`bash
+   ```
    git push origin feature-branch-name
-   \`\`\`
+   ```
 5. Open a Pull Request.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
 EOL
-
-echo "README.md file created successfully!"
