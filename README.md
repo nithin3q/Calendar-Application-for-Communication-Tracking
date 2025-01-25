@@ -31,7 +31,7 @@ This is a React-based calendar application designed for tracking and managing co
 ## Installation
 
 1. Clone the repository:
-   \`\`\`bash
+   ```
    git clone https://github.com/nithin3q/Calendar-Application-for-Communication-Tracking.git
    cd Calendar-Application-for-Communication-Tracking
    ```
